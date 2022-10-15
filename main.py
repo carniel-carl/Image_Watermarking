@@ -11,8 +11,13 @@ def add_watermark():
     # return the path to the selected file
     image = Image.open(filename)
 
+    draw = ImageDraw.Draw(image)
+    font_size = image.width // 15
+    font = ImageFont.truetype('Arial.ttf', font_size)
+    x, y = image.width / 2, image.height / 2
     text = askstring(title="Watermark text", prompt="Enter Watermark text")
-    location = askstring(title="Watermark Location", prompt="LEFT/RIGHT/UP/DOWN/MIDDLE")
+
+    draw.text((x, y), text=text, fill='black', stroke_fill='white', stroke_width=10, font=font, anchor='ms')
 
     return image.show()
 
